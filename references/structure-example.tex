@@ -1,0 +1,98 @@
+% =====================================================================
+% structure-example.tex  —  shows the document shape + ONE full topic
+% for studynotegeneratorcaveman. This is a PATTERN to copy, not a fixed
+% template. Pair it with assets/preamble.tex.
+%
+% Full file would be:
+%   \input{preamble.tex}
+%   \begin{document}
+%     <title block>          (below)
+%     <intro "how to read" box>
+%     \tableofcontents
+%     <topic sections>       (one shown below)
+%     <closing checklist>
+%   \end{document}
+% =====================================================================
+
+
+% ----------------------- TITLE BLOCK -----------------------
+\begin{center}
+  {\Huge\bfseries\color{ink} Course Name — CT 1}\\[4pt]
+  {\Large\bfseries\color{accent} Chapter 1: Chapter Title}\\[8pt]
+  {\small Theory + Bangla intuition + caveman notes + solved math}\\[2pt]
+  {\small\itshape Built from the student's own handwritten lecture notes — same flow}\\[6pt]
+  {\color{accent}\rule{0.7\textwidth}{1pt}}
+\end{center}
+
+% ----------------------- "HOW TO READ" INTRO BOX -----------------------
+\vspace{4pt}
+\begin{tcolorbox}[colback=softgrey, colframe=ink, boxrule=0.6pt, arc=3pt, left=10pt, right=10pt]
+{\bfseries\color{ink} এই নোট কীভাবে পড়বে:} প্রতিটা টপিকে আগে \kw{theory} (ইংরেজিতে, যেভাবে
+exam-এ লিখবে), তারপর \textcolor{banglafr}{\textbf{সবুজ box}}-এ বাংলায় আসল ব্যাপারটা, তারপর
+\textcolor{cavefr}{\textbf{কমলা box}}-এ ছোট্ট caveman ভাষায় মনে রাখার লাইন। নীল box = মুখস্থ
+করার সূত্র, হলুদ box = exam hint।
+\end{tcolorbox}
+
+\tableofcontents
+\vspace{6pt}\hrule\vspace{10pt}
+
+
+% ===================== ONE FULL TOPIC (the pattern) =====================
+\section{Refractive Index}
+
+% (1) THEORY — English, exam-ready, math in math mode
+The \kw{refractive index} $n$ is the ratio that tells how much light slows in a medium:
+\[
+n=\frac{c}{v},\qquad v=\frac{c}{\sqrt{\varepsilon_r}},\qquad \boxed{\,n=\sqrt{\varepsilon_r}\,}.
+\]
+The wave's $E$-field drives the bound electrons, creating an oscillating polarization that
+re-radiates and effectively slows the wave — this slowing is what we observe as refraction.
+
+% (4) KEY EQUATION BOX — isolate the formula to memorize
+\begin{formbox}
+\[
+n=\frac{c}{v}=\sqrt{\varepsilon_r}\qquad\text{(non-magnetic medium, } \mu_r=1)
+\]
+\end{formbox}
+
+% (5) EXAM BOX — use where the source flagged "exam:"
+\begin{exambox}
+\textbf{Q: Explain the speed using $\varepsilon_r$.}\\
+From $v=\dfrac{c}{\sqrt{\varepsilon_r}}$: if $\varepsilon_r\!\uparrow$ then $v\!\downarrow$
+(slower light, bigger $n$); if $\varepsilon_r\!\downarrow$ then $v\!\uparrow$ (faster light).
+\end{exambox}
+
+% (2) BENGALI INTUITION BOX — the physical picture, plain Bengali
+\begin{banglabox}
+$n=\dfrac{c}{v}$ — আলো কোনো মাধ্যমে ঢুকলে কতটা ধীর হয় তার মাপ। $E$-ক্ষেত্র পরমাণুর ইলেকট্রনকে
+দোলায়, polarization হয়, আর সেই কারণে আলো ধীর হয় — এটাই refraction। $\varepsilon_r$ বড় হলে
+বেশি বাধা, আলো ধীরে চলে; ছোট হলে আলো জোরে চলে। সূত্র: $n=\sqrt{\varepsilon_r}$।
+\end{banglabox}
+
+% (3) CAVEMAN BOX — 1-3 line hook, arrows for causality
+\begin{cavebox}
+$n=c/v$. $E$ shake electron $\rightarrow$ polarize $\rightarrow$ light slow = refraction.
+Big $\varepsilon_r$ = big obstacle = slow light = big $n$. Remember: $n=\sqrt{\varepsilon_r}$.
+\end{cavebox}
+
+% (7) WORKED EXAMPLE — full steps, reuse the source/textbook example number
+\subsection{Solved Example X.Y}
+\textbf{Given} $\varepsilon_r=2.25$:
+\[
+n=\sqrt{2.25}=1.5,\qquad v=\frac{c}{n}=\frac{3\times10^{8}}{1.5}=2\times10^{8}\ \mathrm{m/s}.
+\]
+
+
+% ===================== CLOSING CHECKLIST =====================
+\section*{\color{ink}CT-1 Topic Checklist}
+\addcontentsline{toc}{section}{CT-1 Topic Checklist}
+\begin{tcolorbox}[colback=softgrey, colframe=ink, boxrule=0.7pt, arc=3pt]
+\begin{multicols}{2}
+\begin{enumerate}
+  \item Topic one
+  \item Topic two
+  \item Topic three
+\end{enumerate}
+\end{multicols}
+\textbf{Solved-example targets:} list the example numbers the student must be able to do.
+\end{tcolorbox}

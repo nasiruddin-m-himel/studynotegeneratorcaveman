@@ -1,0 +1,113 @@
+% =====================================================================
+% preamble.tex  —  drop-in preamble for studynotegeneratorcaveman
+% Copy this file into the working directory and \input{preamble.tex}
+% Engine: xelatex (run twice). Renders Bengali conjuncts + bold correctly.
+% =====================================================================
+\documentclass[11pt]{article}
+
+% ---------- FONTS (Cross-Platform Bengali Safe) ----------
+\usepackage{fontspec}
+% On Windows, Nirmala UI has native Bengali shaping and bold weights without glyph corruption.
+% On Linux/Docker sandboxes, FreeSerif is the standard fallback.
+\IfFontExistsTF{Nirmala UI}{
+  \setmainfont{Nirmala UI}[Script=Bengali]
+}{
+  \IfFontExistsTF{FreeSerif}{
+    \setmainfont{FreeSerif}[Script=Bengali, AutoFakeBold=2.4, AutoFakeSlant=0.15]
+  }{
+    \setmainfont{Arial}[Script=Bengali]
+  }
+}
+
+% ---------- PACKAGES ----------
+\usepackage{amsmath, amssymb}
+\usepackage[a4paper, margin=2cm]{geometry}
+\usepackage{xcolor}
+\usepackage[most]{tcolorbox}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage{tikz}
+\usepackage{hyperref}
+\usepackage{multicol}
+\usepackage{booktabs, array}
+\usetikzlibrary{arrows.meta, decorations.pathmorphing, angles, quotes, calc}
+
+\hypersetup{colorlinks=true, linkcolor=accent, urlcolor=accent}
+\setlist{leftmargin=1.4em, topsep=2pt, itemsep=1pt}
+
+% ---------- COLORS ----------
+\definecolor{ink}{HTML}{17223B}      % deep navy — headings
+\definecolor{accent}{HTML}{0E7C7B}   % teal — subsections / rules
+\definecolor{banglabg}{HTML}{E8F5E9} % green box bg
+\definecolor{banglafr}{HTML}{2E7D32} % green box frame
+\definecolor{cavebg}{HTML}{FFF1E2}   % orange box bg
+\definecolor{cavefr}{HTML}{C75100}   % orange box frame
+\definecolor{exambg}{HTML}{FFF8E1}   % yellow box bg
+\definecolor{examfr}{HTML}{E08A00}   % yellow box frame
+\definecolor{formbg}{HTML}{E7F1FB}   % blue box bg
+\definecolor{formfr}{HTML}{14539A}   % blue box frame
+\definecolor{softgrey}{HTML}{F4F5F7} % neutral panels
+
+% ---------- SECTION STYLE ----------
+\titleformat{\section}{\Large\bfseries\color{ink}}{\thesection}{0.6em}{}[{\color{accent}\titlerule[1.2pt]}]
+\titleformat{\subsection}{\large\bfseries\color{accent}}{\thesubsection}{0.5em}{}
+\titlespacing*{\section}{0pt}{14pt}{6pt}
+\titlespacing*{\subsection}{0pt}{10pt}{4pt}
+
+% ---------- HEADER / FOOTER ----------
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\color{ink}\bfseries Course \,|\, CT / Exam Note}
+\fancyhead[R]{\small\color{accent}Chapter Title}
+\fancyfoot[C]{\small\thepage}
+\renewcommand{\headrulewidth}{0.5pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% ---------- THE CORE STUDY BOXES (ALL BREAKABLE) ----------
+% Green: Bengali intuition
+\newtcolorbox{banglabox}{enhanced, breakable, colback=banglabg, colframe=banglafr,
+  boxrule=0.8pt, arc=3pt, left=8pt, right=8pt, top=5pt, bottom=5pt,
+  fonttitle=\bfseries\small, coltitle=white, colbacktitle=banglafr,
+  attach boxed title to top left={xshift=8pt, yshift=-2pt},
+  boxed title style={arc=2pt}, title={\,সহজ বাংলায় — কী ঘটছে?\,}}
+
+% Orange: caveman memory hook
+\newtcolorbox{cavebox}{enhanced, breakable, colback=cavebg, colframe=cavefr,
+  boxrule=0.8pt, arc=3pt, left=8pt, right=8pt, top=5pt, bottom=5pt,
+  fonttitle=\bfseries\small, coltitle=white, colbacktitle=cavefr,
+  attach boxed title to top left={xshift=8pt, yshift=-2pt},
+  boxed title style={arc=2pt}, title={\,গুহামানব বলে (Caveman)\,}}
+
+% Yellow: exam hint / exam-style Q&A
+\newtcolorbox{exambox}{enhanced, breakable, colback=exambg, colframe=examfr,
+  boxrule=0.8pt, arc=3pt, left=8pt, right=8pt, top=5pt, bottom=5pt,
+  fonttitle=\bfseries\small, coltitle=white, colbacktitle=examfr,
+  attach boxed title to top left={xshift=8pt, yshift=-2pt},
+  boxed title style={arc=2pt}, title={\,Exam-e ashte pare\,}}
+
+% Blue: key equation to memorize
+\newtcolorbox{formbox}{enhanced, breakable, colback=formbg, colframe=formfr,
+  boxrule=0.8pt, arc=3pt, left=8pt, right=8pt, top=6pt, bottom=6pt,
+  fonttitle=\bfseries\small, coltitle=white, colbacktitle=formfr,
+  attach boxed title to top left={xshift=8pt, yshift=-2pt},
+  boxed title style={arc=2pt}, title={\,Key Equation\,}}
+
+% Teal: Solved Textbook / Homework Math Example (Fully Breakable Across Pages)
+\newtcolorbox{mathbox}[1]{enhanced, breakable, colback=white, colframe=accent,
+  boxrule=0.9pt, arc=3pt, left=8pt, right=8pt, top=6pt, bottom=6pt,
+  fonttitle=\bfseries\normalsize, coltitle=white, colbacktitle=accent,
+  title={#1}}
+
+% inline keyword highlighter
+\newcommand{\kw}[1]{\textbf{\color{ink}#1}}
+
+% 6 Red Stars & Suggestion Spotlight Box
+\newcommand{\sugstars}{\textcolor{red}{\Large $\bigstar\bigstar\bigstar\bigstar\bigstar\bigstar$}}
+\newcommand{\suggestionspot}[2]{%
+\begin{tcolorbox}[enhanced, breakable, colback=red!5!white, colframe=red!80!black,
+  boxrule=1.1pt, arc=3pt, left=8pt, right=8pt, top=5pt, bottom=5pt]
+  {\sugstars \quad \bfseries\normalsize\textcolor{red!90!black}{EXAM SUGGESTION: #1}}\\[3pt]
+  \small\textcolor{ink}{#2}
+\end{tcolorbox}
+}

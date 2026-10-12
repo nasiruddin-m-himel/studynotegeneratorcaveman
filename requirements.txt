@@ -1,0 +1,3 @@
+# Python requirements for Study Note Generator (Caveman + Bangla)
+# Used by scripts/rasterize_pdf.py for PDF rendering & visual verification
+pymupdf>=1.24.0
